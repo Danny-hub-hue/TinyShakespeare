@@ -22,10 +22,10 @@ if page =="Demo":
     if st.button('Generate Text'):
         if seed_text:
             # Generate text using your model
-            generated_text = generate_text(seed_text,model_path,max_length=length)
-    
-            # Display the generated text
-            st.write(generated_text)
+            with st.spinner("Writing text...")
+                generated_text = generate_text(seed_text,model_path,max_length=length)
+                # Display the generated text
+                st.write(generated_text)
         else:
             st.write("Please enter some seed text to generate Shakespearean text.")
 
