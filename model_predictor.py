@@ -15,7 +15,7 @@ print(tokenizer.texts_to_sequences("Hello World"))
 model = GRUModel(max_id=65)
 
 def generate_text(seed_text, model_path, max_length=100, temperature=1.0):
-    model.load_state_dict(torch.load(model_path))
+    model.load_state_dict(torch.load(model_path, map_location = torch.device("cpu")))
     model.eval()
 
     generated = seed_text
@@ -36,11 +36,11 @@ def generate_text(seed_text, model_path, max_length=100, temperature=1.0):
 
 #Declare GPU and move model to it
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-#print(f"Running prediciton on: {device}")
+print(f"Running prediciton on: {device}")
 model.to(device)
 
 # Example usage
-model_path = 'tiny_shakespeare_model.pkl'
-seed_text = "Hello "
-generated_text = generate_text(seed_text, model_path, max_length=100)
+#model_path = 'tiny_shakespeare_model.pkl'
+#seed_text = "Hello "
+#generated_text = generate_text(seed_text, model_path, max_length=100)
 #print(generated_text)
